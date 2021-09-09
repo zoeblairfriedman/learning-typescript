@@ -18,3 +18,10 @@ const myCar = carMakers.pop();
 carMakers.map((car: string): string => {
   return car.toLowerCase();
 })
+
+// flexible types. if we're initializing with one but we know we'll want two. 
+
+// const importantDates = [new Date(), '2030=-10-10'] this will initialize both
+const importantDates: (Date | string)[] = [new Date()]; // this will let us set up for both
+importantDates.push(('2030-10-10'))
+importantDates.push((new Date()))
