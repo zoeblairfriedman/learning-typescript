@@ -1,7 +1,7 @@
-interface Vehicle {
-  name: string;
-  year: number;
-  broken: boolean;
+interface Reportable {
+  // name: string;
+  // year: number;
+  // broken: boolean;
   summary(): string; //has to have a fnction that returns a string
 }
 
@@ -20,11 +20,8 @@ const oldCivic = {
 //   console.log(`Broken: ${vehicle.broken}`)
 // }
 
-const printVehicle = (vehicle: Vehicle): void => {
-  // console.log(`Name: ${vehicle.name}`)
-  // console.log(`Year: ${vehicle.year}`)
-  // console.log(`Broken: ${vehicle.broken}`)
-  console.log(vehicle.summary())
+const printSummary = (item: Reportable): void => {
+  console.log(item.summary())
 }
 
-printVehicle(oldCivic)
+printSummary(oldCivic)
