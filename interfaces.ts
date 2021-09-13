@@ -1,7 +1,4 @@
 interface Reportable {
-  // name: string;
-  // year: number;
-  // broken: boolean;
   summary(): string; //has to have a fnction that returns a string
 }
 
@@ -11,6 +8,15 @@ const oldCivic = {
   broken: true,
   summary(): string {
     return `Name: ${this.name}`
+  }
+}
+
+const newDrink = {
+  color: 'brown',
+  carbonated: true,
+  sugar: 40,
+  summary(): string {
+    return `My drink has ${this.sugar} grams of sugar`
   }
 }
 
@@ -25,3 +31,5 @@ const printSummary = (item: Reportable): void => {
 }
 
 printSummary(oldCivic)
+printSummary(newDrink)
+
