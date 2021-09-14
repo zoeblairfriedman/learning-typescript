@@ -1,10 +1,18 @@
 class Vehicle {
+  //you don't need to initialize it, just define. But you can do it both here
+  color: string;
+
+  //or define it in the construcctor
+  constructor(color: string){
+    this.color = color
+  }
+
   protected honk(): void {
     console.log('beep beep')
   }
 }
 
-const vehicle = new Vehicle();
+const vehicle = new Vehicle('orange');
 // vehicle.drive();
 // vehicle.honk();
 
@@ -21,11 +29,12 @@ class Car extends Vehicle {
   }
 }
 
-const car = new Car();
+const car = new Car('blue');
 car.startDrivingProcess()
 
 
-// differences
+console.log(vehicle.color)
+// differences.... modifiers!!! 
 
 // modifiers public, private, protected can restrict access on different functions and variables. by default they are public. 
 
