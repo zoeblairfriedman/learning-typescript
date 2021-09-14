@@ -1,10 +1,11 @@
 class Vehicle {
   //you don't need to initialize it, just define. But you can do it both here
-  color: string;
+  // color: string;
 
   //or define it in the construcctor
-  constructor(color: string){
-    this.color = color
+  //if you add the public modifier, whatever you pass in first will be assigned as an instance variable to the instance of the Vehicle
+  constructor(public color: string){
+    // this.color = color
   }
 
   protected honk(): void {
