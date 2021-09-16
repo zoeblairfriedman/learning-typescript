@@ -1,7 +1,7 @@
 class Monster {
   constructor(public color: string){}
 
-  private roar(): string{
+  protected roar(): string{
     return "ROOOOOOAAARRR"
   }
   scare(): string{
@@ -10,5 +10,13 @@ class Monster {
 
 }
 
-let gizmo = new Monster("brown")
-// gizmo.roar()
+
+
+class Mogwai extends Monster {
+  scare(): string{
+    return this.roar()
+  }
+}
+
+let gizmo = new Mogwai("brown")
+console.log(gizmo.scare())
