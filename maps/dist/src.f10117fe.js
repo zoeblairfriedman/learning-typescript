@@ -117,7 +117,43 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../node_modules/faker/lib/fake.js":[function(require,module,exports) {
+})({"src/CustomMap.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CustomMap = void 0;
+
+var CustomMap = function () {
+  function CustomMap(divId) {
+    this.googleMap = new google.maps.Map(document.getElementById(divId), {
+      zoom: 1,
+      center: {
+        lat: 0,
+        lng: 0
+      }
+    });
+  } //bad version
+
+
+  CustomMap.prototype.addUserMarker = function (user) {
+    new google.maps.Marker({
+      map: this.googleMap,
+      position: {
+        lat: user.location.lat,
+        lng: user.location.lng
+      }
+    });
+  };
+
+  CustomMap.prototype.addCompanyMarker = function (company) {};
+
+  return CustomMap;
+}();
+
+exports.CustomMap = CustomMap;
+},{}],"../node_modules/faker/lib/fake.js":[function(require,module,exports) {
 /*
   fake.js - generator method for combining faker methods based on string input
 
@@ -136897,36 +136933,6 @@ var User = function () {
 }();
 
 exports.User = User;
-},{"faker":"../node_modules/faker/index.js"}],"src/Company.ts":[function(require,module,exports) {
-"use strict";
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Company = void 0;
-
-var faker_1 = __importDefault(require("faker"));
-
-var Company = function () {
-  function Company() {
-    this.companyName = faker_1.default.company.companyName();
-    this.catchPhrase = faker_1.default.company.catchPhrase();
-    this.location = {
-      lat: parseFloat(faker_1.default.address.latitude()),
-      lng: parseFloat(faker_1.default.address.longitude())
-    };
-  }
-
-  return Company;
-}();
-
-exports.Company = Company;
 },{"faker":"../node_modules/faker/index.js"}],"src/index.ts":[function(require,module,exports) {
 "use strict";
 
@@ -136934,17 +136940,14 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var CustomMap_1 = require("./CustomMap");
+
 var User_1 = require("./User");
 
-var Company_1 = require("./Company"); /// <reference types="@types/google.maps" />
-
-
+var customMap = new CustomMap_1.CustomMap('map');
 var user = new User_1.User();
-var company = new Company_1.Company();
-console.log(user);
-console.log(company);
-google;
-},{"./User":"src/User.ts","./Company":"src/Company.ts"}],"../../../../.nvm/versions/node/v15.12.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+customMap.addUserMarker(user);
+},{"./CustomMap":"src/CustomMap.ts","./User":"src/User.ts"}],"../../../../.nvm/versions/node/v15.12.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -136972,7 +136975,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51488" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58356" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
