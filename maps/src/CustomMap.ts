@@ -1,5 +1,17 @@
-// this is importing both the value and the the type
-import { User } from "./User"
+
+
+  // it allows our classes to opt in. rather than saying our methodd has to accomodate all of these objects, the objects have to chose to fulfill or satisfy the interface by having the correct properties with the correct names and correct types 
+
+  // instructions to ever class on how they can be an argument to addMarker:
+
+  interface Mappable {
+    location: {
+      lat: number;
+      lng: number;
+    }
+  }
+
+
 
 
 export class CustomMap {
@@ -17,19 +29,57 @@ export class CustomMap {
   }
 
 
-  //bad version
-  addUserMarker(user: User): void {
+  //bad version!!
+  // addUserMarker(user: User): void {
+  //   new google.maps.Marker({
+  //     map: this.googleMap,
+  //     position: {
+  //       lat: user.location.lat,
+  //       lng: user.location.lng
+  //     }
+  //   })
+  // }
+
+  // addCompanyMarker(company: Company): void {
+  //   new google.maps.Marker({
+  //     map: this.googleMap,
+  //     position: {
+  //       lat: company.location.lat,
+  //       lng: company.location.lng
+  //     }
+  //   })
+  // }
+
+
+  // also bad version version
+
+  // addMarker(mappable: User | Company): void {
+
+    // new google.maps.Marker({
+    //   map: this.googleMap,
+    //   position: {
+    //     lat: mappable.location.lat,
+    //     lng: mappable.location.lng
+    //   }
+    // })
+  
+  
+  
+  // }
+
+  addMarker(mappable: Mappable): void {
+
     new google.maps.Marker({
       map: this.googleMap,
       position: {
-        lat: user.location.lat,
-        lng: user.location.lng
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
       }
     })
   }
 
-  addCompanyMarker(company: Company): void {
 
-  }
+
+    // it allows our classes to opt in. rather than saying our methodd has to accomodate all of these objects, the objects have to chose to fulfill or satisfy the interface by having the correct properties with the correct names and correct types 
 
 }

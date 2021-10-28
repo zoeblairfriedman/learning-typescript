@@ -118,7 +118,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"src/CustomMap.ts":[function(require,module,exports) {
-"use strict";
+"use strict"; // it allows our classes to opt in. rather than saying our methodd has to accomodate all of these objects, the objects have to chose to fulfill or satisfy the interface by having the correct properties with the correct names and correct types 
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -134,20 +134,46 @@ var CustomMap = function () {
         lng: 0
       }
     });
-  } //bad version
+  } //bad version!!
+  // addUserMarker(user: User): void {
+  //   new google.maps.Marker({
+  //     map: this.googleMap,
+  //     position: {
+  //       lat: user.location.lat,
+  //       lng: user.location.lng
+  //     }
+  //   })
+  // }
+  // addCompanyMarker(company: Company): void {
+  //   new google.maps.Marker({
+  //     map: this.googleMap,
+  //     position: {
+  //       lat: company.location.lat,
+  //       lng: company.location.lng
+  //     }
+  //   })
+  // }
+  // also bad version version
+  // addMarker(mappable: User | Company): void {
+  // new google.maps.Marker({
+  //   map: this.googleMap,
+  //   position: {
+  //     lat: mappable.location.lat,
+  //     lng: mappable.location.lng
+  //   }
+  // })
+  // }
 
 
-  CustomMap.prototype.addUserMarker = function (user) {
+  CustomMap.prototype.addMarker = function (mappable) {
     new google.maps.Marker({
       map: this.googleMap,
       position: {
-        lat: user.location.lat,
-        lng: user.location.lng
+        lat: mappable.location.lat,
+        lng: mappable.location.lng
       }
     });
   };
-
-  CustomMap.prototype.addCompanyMarker = function (company) {};
 
   return CustomMap;
 }();
@@ -136933,6 +136959,36 @@ var User = function () {
 }();
 
 exports.User = User;
+},{"faker":"../node_modules/faker/index.js"}],"src/Company.ts":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Company = void 0;
+
+var faker_1 = __importDefault(require("faker"));
+
+var Company = function () {
+  function Company() {
+    this.companyName = faker_1.default.company.companyName();
+    this.catchPhrase = faker_1.default.company.catchPhrase();
+    this.location = {
+      lat: parseFloat(faker_1.default.address.latitude()),
+      lng: parseFloat(faker_1.default.address.longitude())
+    };
+  }
+
+  return Company;
+}();
+
+exports.Company = Company;
 },{"faker":"../node_modules/faker/index.js"}],"src/index.ts":[function(require,module,exports) {
 "use strict";
 
@@ -136944,10 +137000,14 @@ var CustomMap_1 = require("./CustomMap");
 
 var User_1 = require("./User");
 
+var Company_1 = require("./Company");
+
 var customMap = new CustomMap_1.CustomMap('map');
 var user = new User_1.User();
+var company = new Company_1.Company();
 customMap.addUserMarker(user);
-},{"./CustomMap":"src/CustomMap.ts","./User":"src/User.ts"}],"../../../../.nvm/versions/node/v15.12.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+customMap.addCompanyMarker(company);
+},{"./CustomMap":"src/CustomMap.ts","./User":"src/User.ts","./Company":"src/Company.ts"}],"../../../../.nvm/versions/node/v15.12.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
