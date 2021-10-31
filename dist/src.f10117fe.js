@@ -117,7 +117,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"CustomMap.ts":[function(require,module,exports) {
+})({"src/CustomMap.ts":[function(require,module,exports) {
 "use strict"; // it allows our classes to opt in. rather than saying our methodd has to accomodate all of these objects, the objects have to chose to fulfill or satisfy the interface by having the correct properties with the correct names and correct types 
 
 Object.defineProperty(exports, "__esModule", {
@@ -134,44 +134,23 @@ var CustomMap = function () {
         lng: 0
       }
     });
-  } //bad version!!
-  // addUserMarker(user: User): void {
-  //   new google.maps.Marker({
-  //     map: this.googleMap,
-  //     position: {
-  //       lat: user.location.lat,
-  //       lng: user.location.lng
-  //     }
-  //   })
-  // }
-  // addCompanyMarker(company: Company): void {
-  //   new google.maps.Marker({
-  //     map: this.googleMap,
-  //     position: {
-  //       lat: company.location.lat,
-  //       lng: company.location.lng
-  //     }
-  //   })
-  // }
-  // also bad version version
-  // addMarker(mappable: User | Company): void {
-  // new google.maps.Marker({
-  //   map: this.googleMap,
-  //   position: {
-  //     lat: mappable.location.lat,
-  //     lng: mappable.location.lng
-  //   }
-  // })
-  // }
-
+  }
 
   CustomMap.prototype.addMarker = function (mappable) {
-    new google.maps.Marker({
+    var _this = this;
+
+    var marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       }
+    });
+    marker.addListener("click", function () {
+      var infoWindow = new google.maps.InfoWindow({
+        content: "Hello world"
+      });
+      infoWindow.open(_this.googleMap, marker);
     });
   };
 
@@ -137007,7 +136986,7 @@ var user = new User_1.User();
 var company = new Company_1.Company();
 customMap.addMarker(user);
 customMap.addMarker(company);
-},{"./CustomMap":"CustomMap.ts","./User":"User.ts","./Company":"Company.ts"}],"../../../../.nvm/versions/node/v15.12.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./CustomMap":"src/CustomMap.ts","./User":"User.ts","./Company":"Company.ts"}],"../../../../.nvm/versions/node/v15.12.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

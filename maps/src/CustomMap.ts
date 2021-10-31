@@ -29,52 +29,21 @@ export class CustomMap {
   }
 
 
-  //bad version!!
-  // addUserMarker(user: User): void {
-  //   new google.maps.Marker({
-  //     map: this.googleMap,
-  //     position: {
-  //       lat: user.location.lat,
-  //       lng: user.location.lng
-  //     }
-  //   })
-  // }
-
-  // addCompanyMarker(company: Company): void {
-  //   new google.maps.Marker({
-  //     map: this.googleMap,
-  //     position: {
-  //       lat: company.location.lat,
-  //       lng: company.location.lng
-  //     }
-  //   })
-  // }
-
-
-  // also bad version version
-
-  // addMarker(mappable: User | Company): void {
-
-    // new google.maps.Marker({
-    //   map: this.googleMap,
-    //   position: {
-    //     lat: mappable.location.lat,
-    //     lng: mappable.location.lng
-    //   }
-    // })
-  
-  
-  
-  // }
-
   addMarker(mappable: Mappable): void {
 
-    new google.maps.Marker({
+    const marker = new google.maps.Marker({
       map: this.googleMap,
       position: {
         lat: mappable.location.lat,
         lng: mappable.location.lng
       }
+    })
+
+    marker.addListener("click", () => {
+      const infoWindow = new google.maps.InfoWindow({
+        content: "Hello world"
+      })
+      infoWindow.open(this.googleMap, marker)
     })
   }
 
